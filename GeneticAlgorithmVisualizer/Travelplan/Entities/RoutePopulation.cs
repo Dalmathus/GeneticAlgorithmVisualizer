@@ -9,27 +9,24 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
 {
     internal class RoutePopulation : Population
     {
-
-        private List<Route> _routes;
-
         public RoutePopulation()
         {
-            this._routes = new List<Route>();
+            this._chromosomes = new List<Chromosome>();            
         }
 
-        public void Add(Route entity)
+        public override void Add(Chromosome chromosome)
         {
-            this._routes.Add(entity);
+            this._chromosomes.Add(chromosome);
         }
 
-        public void SortRoutes()
+        public override void Sort()
         {
-            this._routes.Sort();
+            this._chromosomes.Sort();
         }
 
-        public List<Route> GetRoutes()
+        public List<Chromosome> GetRoutes()
         {
-            return this._routes;
+            return this._chromosomes;
         }
 
         public override void Clear()

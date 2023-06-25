@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "db5a9eaeeffbd036",
+            "id": "a22163f4d719b522",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -62,6 +62,14 @@
             "type": "leaf",
             "state": {
               "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "c7326e56f09fa816",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
               "state": {}
             }
           }
@@ -146,7 +154,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "db5a9eaeeffbd036",
+  "active": "a22163f4d719b522",
   "lastOpenFiles": [
     "Basic Plan/Goal.md",
     "Basic Plan"

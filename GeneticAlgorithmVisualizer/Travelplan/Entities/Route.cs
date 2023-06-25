@@ -3,24 +3,23 @@ using GeneticAlgorithmVisualizer.Travelplan.Contstraints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace GeneticAlgorithmVisualizer.Travelplan.Entities
 {
-    internal class Route : Chromosome, IEquatable<Route>, IComparable<Route>
-    {
+    internal class Route : Chromosome
+    {       
 
-        private Map _map;
-        private List<Movement> _itinerary;
-        private int _distance;
+        private Map _map;     
 
         public Route(Map map)
         {
             _map = map;
-            _itinerary = new List<Movement>();
+            _genes = new List<Gene>();
         }
 
-        public void GenerateRandomRoute()
+        public override void GenerateRandomChromosome()
         {
             int x;
             Location lFrom, lTo;
@@ -44,34 +43,27 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
             {
                 x = random.Next(validPoints.Count);
                 lTo = validPoints.ElementAt(x);
-                this._itinerary.Add(new Movement(lFrom, lTo));
+                this._genes.Add(new Movement(lFrom, lTo));
                 validPoints.RemoveAt(x);
                 lFrom = lTo;
             }
 
-            this.SetDistance();
+            this.CalculateFitness();
         }
 
-        public int GetDistance()
-        { 
-            return this._distance;
-        }
-
-        private void SetDistance()
+        /// <summary>
+        /// This will be pulled into PopFitnessEval when I start writing those classes
+        /// </summary>
+        private void CalculateFitness()
         {
-            int distance = 0;
+            double distance = 0;
 
-            foreach (Movement movement in this._itinerary)
+            foreach (Movement movement in this._genes)
             {
                 distance += movement.GetDistance();
             }
 
-            this._distance = distance;
-        }
-
-        public List<Movement> GetLocations()
-        {
-            return this._itinerary;
+            this.SetFitness(distance);
         }
 
         public override void Export()
@@ -84,17 +76,19 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
             throw new NotImplementedException();
         }
 
-        public bool Equals(Route other)
+        public override bool Equals(Chromosome other)
         {
             throw new NotImplementedException();
         }
 
-        public int CompareTo(Route other)
+        public override int CompareTo(Chromosome other)
         {
+            Route comparisonRoute = other as Route;
+
             if (other == null) return 1;
 
-            int x = this.GetDistance();
-            int y = other.GetDistance();
+            double x = this.GetFitness();
+            double y = comparisonRoute.GetFitness();
             
             if (x < y) return -1;
             if (x > y) return 1;

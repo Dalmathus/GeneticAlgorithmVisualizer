@@ -22,7 +22,7 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Contstraints
         public void InstantiateGridPoints(int locations)
         {
             int points = locations;
-            Random random = new Random();
+            Random random = new Random(Guid.NewGuid().GetHashCode());
 
             //randomly assign spots locations until we have hit max, ignore roll if already assigned
             while (points > 0)

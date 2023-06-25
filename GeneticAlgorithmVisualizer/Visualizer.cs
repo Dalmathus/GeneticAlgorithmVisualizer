@@ -1,4 +1,5 @@
-﻿using GeneticAlgorithmVisualizer.Travelplan.Contstraints;
+﻿using GeneticAlgorithmVisualizer.PopulationEntities;
+using GeneticAlgorithmVisualizer.Travelplan.Contstraints;
 using GeneticAlgorithmVisualizer.Travelplan.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace GeneticAlgorithmVisualizer
     {
 
         private Map _map;
-        private const int SIZE = 20;
-        private const int LOCATIONS = 10;
+        private const int SIZE = 5;
+        private const int LOCATIONS = 4;
         private int cellSize;
 
         public Visualizer()
@@ -74,7 +75,7 @@ namespace GeneticAlgorithmVisualizer
         private void DrawRoute(Route route)
         {
             Random rnd = new Random();            
-            List<Movement> itinerary = route.GetLocations();
+            List<Gene> itinerary = route.GetGenes();
             Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
             int offset = cellSize / 2;
 
@@ -82,16 +83,15 @@ namespace GeneticAlgorithmVisualizer
             {
                 Pen p = new Pen(randomColor, 2);
 
-                for (int i = 0; i < itinerary.Count; i++)
+                foreach (Movement gene in itinerary)
                 {
-
                     int x1, x2, y1, y2;
 
                     // Redundant assignment but might refactor this in a more complicated way later
-                    x1 = itinerary[i].GetPoint1().GetX();
-                    x2 = itinerary[i].GetPoint2().GetX();
-                    y1 = itinerary[i].GetPoint1().GetY();
-                    y2 = itinerary[i].GetPoint2().GetY();
+                    x1 = gene.GetPoint1().GetX();
+                    x2 = gene.GetPoint2().GetX();
+                    y1 = gene.GetPoint1().GetY();
+                    y2 = gene.GetPoint2().GetY();
 
                     g.DrawLine(p,
                                x1 * cellSize + offset,
@@ -120,9 +120,9 @@ namespace GeneticAlgorithmVisualizer
         private void buttonRandRoute_Click(object sender, EventArgs e)
         {
             Route route = new Route(_map);
-            route.GenerateRandomRoute();
+            route.GenerateRandomChromosome();
             DrawRoute(route);
-            labelBDText.Text = route.GetDistance().ToString();  
+            labelBDText.Text = route.GetFitness().ToString();  
         }
 
         private void buttonRouteMap_Click(object sender, EventArgs e)
@@ -137,18 +137,30 @@ namespace GeneticAlgorithmVisualizer
             for (int x = 0; x < 100; x++)
             {
                 Route r = new Route(_map);
-                r.GenerateRandomRoute();
+                r.GenerateRandomChromosome();
                 rpop.Add(r);
             }
 
-            rpop.SortRoutes();
-
-            labelBDText.Text = rpop.GetRoutes().ElementAt(0).GetDistance().ToString();
+            rpop.Sort();
+            //labelBDText.Text = rpop.GetRoutes().ElementAt(0).GetDistance().ToString();
 
             foreach (Route rq in rpop.GetRoutes())
             {
                 DrawRoute(rq);
             }
+        }
+
+        /// <summary>
+        /// This will be deleted later, its just for having an easy place to test code for compilation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonFuncTest_Click(object sender, EventArgs e)
+        {
+            List<Chromosome> testList = new List<Chromosome>();
+            Route route = new Route(_map);
+            route.GenerateRandomChromosome();
+            testList.Add(route);
         }
     }
 }

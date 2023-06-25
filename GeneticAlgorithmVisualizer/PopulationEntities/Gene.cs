@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithmVisualizer.PopulationEntities
 {
-    abstract class Gene
+    public abstract class Gene
     {
 
     }

@@ -38,6 +38,7 @@
             this.labelSelectedDistance = new System.Windows.Forms.Label();
             this.labelBDText = new System.Windows.Forms.Label();
             this.buttonRouteMap = new System.Windows.Forms.Button();
+            this.buttonFuncTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonMapCreate
@@ -132,11 +133,22 @@
             this.buttonRouteMap.UseVisualStyleBackColor = true;
             this.buttonRouteMap.Click += new System.EventHandler(this.buttonRouteMap_Click);
             // 
+            // buttonFuncTest
+            // 
+            this.buttonFuncTest.Location = new System.Drawing.Point(12, 395);
+            this.buttonFuncTest.Name = "buttonFuncTest";
+            this.buttonFuncTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonFuncTest.TabIndex = 10;
+            this.buttonFuncTest.Text = "Func Test";
+            this.buttonFuncTest.UseVisualStyleBackColor = true;
+            this.buttonFuncTest.Click += new System.EventHandler(this.buttonFuncTest_Click);
+            // 
             // Visualizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(506, 459);
+            this.Controls.Add(this.buttonFuncTest);
             this.Controls.Add(this.buttonRouteMap);
             this.Controls.Add(this.labelBDText);
             this.Controls.Add(this.labelSelectedDistance);
@@ -166,6 +178,7 @@
         private System.Windows.Forms.Label labelSelectedDistance;
         private System.Windows.Forms.Label labelBDText;
         private System.Windows.Forms.Button buttonRouteMap;
+        private System.Windows.Forms.Button buttonFuncTest;
     }
 }
 

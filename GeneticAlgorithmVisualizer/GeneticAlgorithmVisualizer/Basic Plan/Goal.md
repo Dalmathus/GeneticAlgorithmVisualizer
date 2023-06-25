@@ -6,8 +6,8 @@ Population Controller
 	Generate a population
 	Test the fitness of the population
 	Generate new entities from the existing population
-	Mutate new entitities into the population?
-	Select canditates for next generation
+	Mutate new entities into the population?
+	Select candidates for next generation
 	Check if stop condition has been reached
 	Return to fitness test step if not broken
 

@@ -8,5 +8,6 @@ namespace GeneticAlgorithmVisualizer.Genetics
 {
     internal class PopulationController
     {
+        
     }
 }
