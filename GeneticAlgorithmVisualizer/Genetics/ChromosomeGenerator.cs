@@ -1,5 +1,6 @@
 ﻿using GeneticAlgorithmVisualizer.Constraints;
 using GeneticAlgorithmVisualizer.PopulationEntities;
+using GeneticAlgorithmVisualizer.Travelplan.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithmVisualizer.Genetics
 {
-    public abstract class PopulationGenerator
+    abstract class ChromosomeGenerator
     {
-        public abstract Population GenerateRandomPopulation(RuleSet ruleSet);
-
+        public abstract Chromosome GenerateRandomChromosome(RuleSet ruleSet);
     }
 }

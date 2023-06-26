@@ -12,8 +12,6 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
         protected List<Gene> _genes;
         protected double _fitness; 
 
-        public abstract void GenerateRandomChromosome();
-
         public abstract void Export();
 
         public abstract void Import();
@@ -30,6 +28,10 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
         public double GetFitness()
         { 
             return this._fitness;
+        }
+        public void SetGenes(List<Gene> genes)
+        {
+            this._genes = genes;
         }
 
         public List<Gene> GetGenes()

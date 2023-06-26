@@ -10,19 +10,35 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
     {
         protected List<Chromosome> _chromosomes;
 
-        public abstract void Add(Chromosome entity);
+        public void Add(Chromosome chromosome)
+        {
+            this._chromosomes.Add(chromosome);
+        }
 
-        public abstract void Remove(Chromosome entity);
+        public void Remove(Chromosome chromosome)
+        {
+            this._chromosomes.Remove(chromosome);
+        }
 
-        public virtual void Sort()
+        public void Sort()
         {
             _chromosomes.Sort();
         }
 
-        public abstract void Clear();
+        public List<Chromosome> GetPopulation()
+        {
+            return this._chromosomes;
+        }
+
+        public void Clear()
+        {
+            _chromosomes.Clear();
+        }
 
         public abstract void Export();
 
         public abstract void Import();
+
+        
     }
 }

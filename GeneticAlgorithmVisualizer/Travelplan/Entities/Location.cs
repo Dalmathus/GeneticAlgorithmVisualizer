@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeneticAlgorithmVisualizer.PopulationEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithmVisualizer.Travelplan.Entities
 {
-    internal class Location : IEquatable<Location>
+    internal class Location : Allele
     {
 
         Tuple<int, int> _location;
@@ -16,9 +17,11 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
             _location = new Tuple<int, int>(x, y);
         }
 
-        public bool Equals(Location other)
+        public override bool Equals(Allele other)
         {
-            if (this.GetX() == other.GetX() && this.GetY() == other.GetY())
+            Location otherL = other as Location; 
+
+            if (this.GetX() == otherL.GetX() && this.GetY() == otherL.GetY())
             {
                 return true;
             }

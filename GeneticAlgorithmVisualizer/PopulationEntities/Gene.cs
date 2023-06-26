@@ -8,6 +8,12 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
 {
     public abstract class Gene
     {
+        protected int _value;
+
+        public int GetValue()
+        {
+            return _value;
+        }
 
     }
 }

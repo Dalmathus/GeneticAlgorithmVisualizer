@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace GeneticAlgorithmVisualizer.Travelplan.Entities
 {
     internal class Movement : Gene
-    {
-        private int _distance; //Allele
+    {        
         private Location _point1, _point2;
 
         public Movement(Location p1, Location p2) 
@@ -19,12 +18,7 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
             _point2 = p2;
 
             // Manhattan Distance |x2 - x1| + |y2 - y1|
-            _distance = (Math.Abs(p2.GetX() - p1.GetX())) + (Math.Abs(p2.GetY() - p1.GetY()));
-        }
-
-        public int GetDistance()
-        {
-            return _distance;
+            _value = (Math.Abs(p2.GetX() - p1.GetX())) + (Math.Abs(p2.GetY() - p1.GetY()));
         }
 
         public Location GetPoint1()

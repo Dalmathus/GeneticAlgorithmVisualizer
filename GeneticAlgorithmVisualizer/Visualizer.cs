@@ -1,6 +1,7 @@
 ﻿using GeneticAlgorithmVisualizer.PopulationEntities;
 using GeneticAlgorithmVisualizer.Travelplan.Contstraints;
 using GeneticAlgorithmVisualizer.Travelplan.Entities;
+using GeneticAlgorithmVisualizer.Travelplan.Genetics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,8 +14,8 @@ namespace GeneticAlgorithmVisualizer
     {
 
         private Map _map;
-        private const int SIZE = 5;
-        private const int LOCATIONS = 4;
+        private const int SIZE = 50;
+        private const int LOCATIONS = 75;
         private int cellSize;
 
         public Visualizer()
@@ -119,10 +120,7 @@ namespace GeneticAlgorithmVisualizer
 
         private void buttonRandRoute_Click(object sender, EventArgs e)
         {
-            Route route = new Route(_map);
-            route.GenerateRandomChromosome();
-            DrawRoute(route);
-            labelBDText.Text = route.GetFitness().ToString();  
+            DrawRandomRoute();
         }
 
         private void buttonRouteMap_Click(object sender, EventArgs e)
@@ -130,24 +128,32 @@ namespace GeneticAlgorithmVisualizer
             EstablishRandomRoutesAndDraw();
         }
 
+        private void DrawRandomRoute()
+        {
+            RouteGenerator routeGenerator = new RouteGenerator();
+            Route r = routeGenerator.GenerateRandomChromosome(_map) as Route;
+            DrawRoute(r);
+            labelBDText.Text = r.GetFitness().ToString();
+        }
+
         private void EstablishRandomRoutesAndDraw()
         {
-            RoutePopulation rpop = new RoutePopulation();
-
-            for (int x = 0; x < 100; x++)
-            {
-                Route r = new Route(_map);
-                r.GenerateRandomChromosome();
-                rpop.Add(r);
-            }
-
-            rpop.Sort();
-            //labelBDText.Text = rpop.GetRoutes().ElementAt(0).GetDistance().ToString();
-
-            foreach (Route rq in rpop.GetRoutes())
-            {
-                DrawRoute(rq);
-            }
+            //RoutePopulation rpop = new RoutePopulation();
+            //
+            //for (int x = 0; x < 100; x++)
+            //{
+            //    Route r = new Route();
+            //    r.GenerateRandomChromosome();
+            //    rpop.Add(r);
+            //}
+            //
+            //rpop.Sort();
+            //labelBDText.Text = rpop.GetPopulation().ElementAt(0).GetFitness().ToString();
+            //
+            //foreach (Route rq in rpop.GetPopulation())
+            //{
+            //    DrawRoute(rq);
+            //}
         }
 
         /// <summary>
@@ -157,10 +163,10 @@ namespace GeneticAlgorithmVisualizer
         /// <param name="e"></param>
         private void buttonFuncTest_Click(object sender, EventArgs e)
         {
-            List<Chromosome> testList = new List<Chromosome>();
-            Route route = new Route(_map);
-            route.GenerateRandomChromosome();
-            testList.Add(route);
+            //List<Chromosome> testList = new List<Chromosome>();
+            //Route route = new Route();
+            //route.GenerateRandomChromosome();
+            //testList.Add(route);
         }
     }
 }

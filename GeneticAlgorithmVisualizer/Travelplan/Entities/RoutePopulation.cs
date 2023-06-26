@@ -14,37 +14,12 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
             this._chromosomes = new List<Chromosome>();            
         }
 
-        public override void Add(Chromosome chromosome)
-        {
-            this._chromosomes.Add(chromosome);
-        }
-
-        public override void Sort()
-        {
-            this._chromosomes.Sort();
-        }
-
-        public List<Chromosome> GetRoutes()
-        {
-            return this._chromosomes;
-        }
-
-        public override void Clear()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Export()
         {
             throw new NotImplementedException();
         }
 
         public override void Import()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Remove(Chromosome entity)
         {
             throw new NotImplementedException();
         }
