@@ -25,7 +25,7 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
             _chromosomes.Sort();
         }
 
-        public List<Chromosome> GetPopulation()
+        public List<Chromosome> GetChromosomes()
         {
             return this._chromosomes;
         }

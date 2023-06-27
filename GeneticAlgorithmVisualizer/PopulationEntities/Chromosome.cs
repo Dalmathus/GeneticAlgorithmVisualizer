@@ -20,6 +20,7 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
 
         public abstract bool Equals(Chromosome other);
 
+        public abstract void CalculateFitness();
         public void SetFitness(double fitness)
         {
             this._fitness = fitness;
@@ -29,6 +30,7 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
         { 
             return this._fitness;
         }
+
         public void SetGenes(List<Gene> genes)
         {
             this._genes = genes;

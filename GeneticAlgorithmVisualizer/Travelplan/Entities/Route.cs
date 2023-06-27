@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GeneticAlgorithmVisualizer.Travelplan.Entities
 {
-    internal class Route : Chromosome
+    public class Route : Chromosome, IEquatable<Route>
     {       
  
         public Route()
@@ -16,16 +16,22 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
             _genes = new List<Gene>();
         }        
 
-        /// <summary>
-        /// This will be pulled into PopFitnessEval when I start writing those classes
-        /// </summary>
-        private void CalculateFitness()
+        public Route(Chromosome r)
+        {
+            this._genes = r.GetGenes();
+        }
+            
+        public override void CalculateFitness()
         {
             double distance = 0;
 
-            foreach (Movement movement in this._genes)
+            for (int i = _genes.Count - 1; i > 0; i--)
             {
-                distance += movement.GetValue();
+                Location ep = _genes.ElementAt(i) as Location;
+                Location dp = _genes.ElementAt(i - 1) as Location;
+
+                // Manhattan Distance |x2 - x1| + |y2 - y1|
+                distance += (Math.Abs(dp.GetX() - ep.GetX())) + (Math.Abs(dp.GetY() - ep.GetY()));
             }
 
             this.SetFitness(distance);
@@ -45,6 +51,34 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
             return 0;
         }
 
+        public bool Equals(Route other)
+        {
+            
+            List<Gene> currentLocation = this._genes;
+            List<Gene> comparisonLocation = other.GetGenes();
+
+            for (int i = 0; i < currentLocation.Count; i++)
+            {
+                if (!currentLocation.ElementAt(i).Equals(comparisonLocation.ElementAt(i))) return false;
+            }
+
+            return true;
+        }
+
+        public override string ToString()
+        {
+            string output = "{ ";
+
+            foreach(Location location in this._genes) 
+            {
+                output += location.ToString() + " ";
+            }
+
+            output += "}";
+
+            return output;
+        }
+
         public override void Export()
         {
             throw new NotImplementedException();
@@ -59,5 +93,6 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
         {
             throw new NotImplementedException();
         }
+
     }
 }

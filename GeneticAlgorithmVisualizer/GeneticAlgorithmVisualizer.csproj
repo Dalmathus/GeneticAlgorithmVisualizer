@@ -54,16 +54,15 @@
     <Compile Include="Genetics\PopulationGenerator.cs" />
     <Compile Include="Genetics\PopulationMutator.cs" />
     <Compile Include="Genetics\PopulationSelector.cs" />
-    <Compile Include="PopulationEntities\Allele.cs" />
     <Compile Include="PopulationEntities\Gene.cs" />
     <Compile Include="PopulationEntities\Population.cs" />
     <Compile Include="PopulationEntities\Chromosome.cs" />
     <Compile Include="Travelplan\Contstraints\Map.cs" />
     <Compile Include="Travelplan\Entities\Location.cs" />
-    <Compile Include="Travelplan\Entities\Movement.cs" />
     <Compile Include="Travelplan\Entities\Route.cs" />
     <Compile Include="Travelplan\Entities\RoutePopulation.cs" />
     <Compile Include="Travelplan\Genetics\RouteGenerator.cs" />
+    <Compile Include="Travelplan\Genetics\RoutePopulationFitnessEvaluator.cs" />
     <Compile Include="Travelplan\Genetics\RoutePopulationGenerator.cs" />
     <Compile Include="Visualizer.cs">
       <SubType>Form</SubType>

@@ -1,4 +1,6 @@
-﻿using GeneticAlgorithmVisualizer.PopulationEntities;
+﻿using GeneticAlgorithmVisualizer.Constraints;
+using GeneticAlgorithmVisualizer.PopulationEntities;
+using GeneticAlgorithmVisualizer.Travelplan.Contstraints;
 using GeneticAlgorithmVisualizer.Travelplan.Genetics;
 using System;
 using System.Collections.Generic;
@@ -12,29 +14,32 @@ namespace GeneticAlgorithmVisualizer.Genetics
     {
         protected List<Population> _populations;
         
-        protected PopulationGenerator pg;        
-        protected PopulationCrossover pc;
-        protected PopulationMutator pm;
-        protected PopulationFitnessEvalutator pfe;
-        protected PopulationSelector ps;
+        protected PopulationGenerator _pg;        
+        protected PopulationCrossover _pc;
+        protected PopulationMutator _pm;
+        protected PopulationFitnessEvalutator _pfe;
+        protected PopulationSelector _ps;
+
+        protected RuleSet _ruleSet;
 
         private int _generations;
 
-        public PopulationController(string[] args)
+        public PopulationController(RuleSet ruleSet, string[] args)
         {
             _populations = new List<Population>();
             _generations = 0;
+            _ruleSet = ruleSet as Map;
 
             // Instantiate the process queue,
             // possibly going to just make these all static later
             // but might want multiple threads running at once as different objects
-            pg = new RoutePopulationGenerator();
-            pc = new PopulationCrossover();
-            pm = new PopulationMutator();
-            pfe = new PopulationFitnessEvalutator();
-            ps = new PopulationSelector();
+            _pg = new RoutePopulationGenerator();
+            _pc = new PopulationCrossover();
+            _pm = new PopulationMutator();
+            _pfe = new PopulationFitnessEvalutator();
+            _ps = new PopulationSelector();
 
-            switch (args[1])
+            switch (args[0])
             {
                 case "travelplan":
                     System.Console.WriteLine("Running the Travelling Salesman problem");
@@ -50,25 +55,37 @@ namespace GeneticAlgorithmVisualizer.Genetics
         /// </summary>
         public void RunGenerationCycle()
         {
+            Population iterationPopulation;
+
             if (_generations == 0)
             {
                 // Create the first generation
-                pg.GenerateRandomPopulation(null);
-            } else
+                iterationPopulation = _pg.GenerateRandomPopulation(_ruleSet);
+            }
+            else
             {
-                // Iterate on the next generation
+                // Iterate on the previous generation
+                iterationPopulation = _pg.CopyPopulation(_populations[_generations - 1]);
+
+                _populations[_generations - 1].GetChromosomes()[20].SetFitness(10000d);
             }
 
             // Perform Crossover
 
             // Perform Mutation
 
-            // Evaluate the Fitness of the Generation and Individual Chromosomes
+            // Evaluate the Fitness of the Individual Chromosomes within the population
+            _pfe.EvaulateFitness(iterationPopulation);
 
             // Sort the Population
+            iterationPopulation.Sort();
 
             // Select Surviors
-        }
-        
+            iterationPopulation.GetChromosomes().RemoveRange(100, iterationPopulation.GetChromosomes().Count - 100);
+
+            // Iterate the Generation #
+            _populations.Add(iterationPopulation);
+            _generations++;
+        }        
     }
 }

@@ -12,5 +12,6 @@ namespace GeneticAlgorithmVisualizer.Genetics
     {
         public abstract Population GenerateRandomPopulation(RuleSet ruleSet);
 
+        public abstract Population CopyPopulation(Population population);
     }
 }

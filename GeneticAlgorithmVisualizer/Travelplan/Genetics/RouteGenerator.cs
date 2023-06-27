@@ -17,7 +17,7 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Genetics
         public override Chromosome GenerateRandomChromosome(RuleSet ruleSet)
         {
             int x;
-            Location lFrom, lTo;
+            Location location;
 
             Map map = ruleSet as Map;
 
@@ -29,20 +29,14 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Genetics
             foreach (Location l in map.GetDestinations())
             {
                 validPoints.Add(l);
-            }
-
-            // Get the starting location
-            x = random.Next(validPoints.Count);
-            lFrom = validPoints.ElementAt(x);
-            validPoints.RemoveAt(x);
+            }            
 
             while (validPoints.Count > 0)
             {
                 x = random.Next(validPoints.Count);
-                lTo = validPoints.ElementAt(x);
-                movements.Add(new Movement(lFrom, lTo));
-                validPoints.RemoveAt(x);
-                lFrom = lTo;
+                location = validPoints.ElementAt(x);
+                movements.Add(new Location(location.GetX(), location.GetY()));
+                validPoints.RemoveAt(x);                
             }
 
             Route route = new Route();

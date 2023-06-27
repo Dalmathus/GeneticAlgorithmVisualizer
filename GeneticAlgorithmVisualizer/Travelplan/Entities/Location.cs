@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithmVisualizer.Travelplan.Entities
 {
-    internal class Location : Allele
+    public class Location : Gene, IEquatable<Location>
     {
 
-        Tuple<int, int> _location;
+        private Tuple<int, int> _location;
 
         public Location(int x, int y) 
         {
             _location = new Tuple<int, int>(x, y);
         }
 
-        public override bool Equals(Allele other)
+        public bool Equals(Location other)
         {
-            Location otherL = other as Location; 
+            Location otherL = other;
 
             if (this.GetX() == otherL.GetX() && this.GetY() == otherL.GetY())
             {
@@ -29,6 +29,11 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
             {
                 return false;
             }
+        }
+
+        public override string ToString()
+        {
+            return _location.Item1.ToString() + "-" + _location.Item2.ToString();
         }
 
         public int GetX()
