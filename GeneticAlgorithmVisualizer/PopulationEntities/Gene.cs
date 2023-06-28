@@ -10,6 +10,11 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
     {
         protected int _value;
 
+        public Gene(int value)
+        {
+            _value = value;
+        }
+
         public int GetValue()
         {
             return _value;

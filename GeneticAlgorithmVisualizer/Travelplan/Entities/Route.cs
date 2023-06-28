@@ -31,7 +31,8 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
                 Location dp = _genes.ElementAt(i - 1) as Location;
 
                 // Manhattan Distance |x2 - x1| + |y2 - y1|
-                distance += (Math.Abs(dp.GetX() - ep.GetX())) + (Math.Abs(dp.GetY() - ep.GetY()));
+                //TODO: Refactor this with new structure
+                //distance += (Math.Abs(dp.GetX() - ep.GetX())) + (Math.Abs(dp.GetY() - ep.GetY()));
             }
 
             this.SetFitness(distance);

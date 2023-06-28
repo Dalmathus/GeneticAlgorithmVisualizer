@@ -10,18 +10,16 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
     public class Location : Gene, IEquatable<Location>
     {
 
-        private Tuple<int, int> _location;
-
-        public Location(int x, int y) 
+        public Location(int value) : base(value)
         {
-            _location = new Tuple<int, int>(x, y);
+            _value = value;
         }
 
         public bool Equals(Location other)
         {
             Location otherL = other;
 
-            if (this.GetX() == otherL.GetX() && this.GetY() == otherL.GetY())
+            if (this._value == other.GetValue())
             {
                 return true;
             }
@@ -33,17 +31,7 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Entities
 
         public override string ToString()
         {
-            return _location.Item1.ToString() + "-" + _location.Item2.ToString();
-        }
-
-        public int GetX()
-        {
-            return _location.Item1;
-        }
-
-        public int GetY()
-        {
-            return _location.Item2;
+            return _value.ToString();
         }
     }
 }

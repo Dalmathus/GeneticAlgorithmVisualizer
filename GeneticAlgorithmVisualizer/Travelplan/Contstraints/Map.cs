@@ -30,7 +30,7 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Contstraints
             //locations and plucking them deterministically, but I guess this is theoretically possible to never complete.
             while (points > 0)
             {
-                Location l = new Location(random.Next(0, _size), random.Next(0, _size));
+                Location l = new Location(random.Next(0, _size));
                 if (_locations.Contains(l)) continue;
                 _locations.Add(l);
                 points--;

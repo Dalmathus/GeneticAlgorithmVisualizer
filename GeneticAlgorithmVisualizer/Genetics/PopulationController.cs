@@ -24,11 +24,15 @@ namespace GeneticAlgorithmVisualizer.Genetics
 
         private int _generations;
 
+        private Random _rand;
+        private double _crossoverRate = 0.3d;
+
         public PopulationController(RuleSet ruleSet, string[] args)
         {
             _populations = new List<Population>();
             _generations = 0;
             _ruleSet = ruleSet as Map;
+            _rand = new Random(Guid.NewGuid().GetHashCode());
 
             // Instantiate the process queue,
             // possibly going to just make these all static later
@@ -66,11 +70,25 @@ namespace GeneticAlgorithmVisualizer.Genetics
             {
                 // Iterate on the previous generation
                 iterationPopulation = _pg.CopyPopulation(_populations[_generations - 1]);
-
-                _populations[_generations - 1].GetChromosomes()[20].SetFitness(10000d);
             }
 
+            List<Chromosome> newOffspring = new List<Chromosome>();
+
             // Perform Crossover
+            foreach (Chromosome chromosome in iterationPopulation.GetChromosomes())
+            {
+                if (_rand.NextDouble() < _crossoverRate)
+                {
+                    //Tuple<Chromosome, Chromosome> offspring = _pc.CycleCrossoverTwoRoutes(chromosome, iterationPopulation.GetChromosomes().ElementAt(_rand.Next(0, iterationPopulation.GetChromosomes().Count)));
+                    //newOffspring.Add(offspring.Item1);
+                    //newOffspring.Add(offspring.Item2);
+                }
+            }
+
+            foreach (Chromosome chromosome in newOffspring)
+            {
+                iterationPopulation.Add(chromosome);
+            }
 
             // Perform Mutation
 

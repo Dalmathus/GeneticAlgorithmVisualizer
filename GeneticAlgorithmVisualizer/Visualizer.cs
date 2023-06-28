@@ -16,14 +16,14 @@ namespace GeneticAlgorithmVisualizer
 
         private Map _map;
         private const int SIZE = 5;
-        private const int LOCATIONS = 4;
+        private const int LOCATIONS = 8;
         private int cellSize;
         private PopulationController pc;
 
         public Visualizer()
         {
             InitializeComponent();
-            InitializeGrid();
+            //InitializeGrid();
 
             string[] args = { "travelplan" };
             pc = new PopulationController(_map, args);
@@ -62,7 +62,7 @@ namespace GeneticAlgorithmVisualizer
                 // print all rectangles that have been designated as location
                 foreach (Location location in locations) 
                 {
-                    g.FillRectangle(b, location.GetX() * cellSize, location.GetY() * cellSize, cellSize, cellSize);                  
+                    //g.FillRectangle(b, location.GetX() * cellSize, location.GetY() * cellSize, cellSize, cellSize);                  
                 }
             }
         }
@@ -94,11 +94,11 @@ namespace GeneticAlgorithmVisualizer
                     Location dp = itinerary.ElementAt(i - 1) as Location;
 
                     // Redundant assignment but might refactor this in a more complicated way later
-                    x1 = ep.GetX();
-                    y1 = ep.GetY();
-
-                    x2 = dp.GetX();                    
-                    y2 = dp.GetY();
+                    x1 = 0; //ep.GetX();
+                    y1 = 0; //ep.GetY();
+                          
+                    x2 = 0; //dp.GetX();                    
+                    y2 = 0; //dp.GetY();
 
                     g.DrawLine(p,
                                x1 * cellSize + offset,
@@ -168,84 +168,12 @@ namespace GeneticAlgorithmVisualizer
         /// <param name="e"></param>
         private void buttonFuncTest_Click(object sender, EventArgs e)
         {
+
+            Location l = new Location(1);
+
+            Location d = new Location(2);
+
             //pc.RunGenerationCycle();
-
-            //Step 3. The selected bit from Step  2 would be found in first parent
-            //and pick the exact same position bit which is in second parent
-            //and that bit would be found again in the first parent and,
-            //finally, the exact same position bit which is in second parent will be selected for 1st bit of second offspring.
-
-            //Step 4.The selected bit from Step 3 would be found in first parent
-            //and pick the exact same position bit which is in second parent as the next bit for first offspring.
-            //(Note: for the first offspring, we choose bits only with one move and two moves for second offspring’s bits.)
-
-            // 1, 2, 3, 4
-            // 3, 1, 4, 2
-
-            // O1: 3, 1, 2, 4
-            // O2: 2, 4, 3, 1
-
-            // 3, 4, 8, 2, 7, 1, 6, 5
-            // 4, 2, 5, 1, 6, 8, 3, 7
-
-            // O1: 4, 8, 6, 2 
-            // O2: 1, 7, 4
-
-            int[] parent1 = { 3, 4, 8, 2, 7, 1, 6, 5 };
-            int[] parent2 = { 4, 2, 5, 1, 6, 8, 3, 7 };
-
-            int[] offspring1 = { 0, 0, 0, 0, 0, 0, 0, 0 };
-            int[] offspring2 = { 0, 0, 0, 0, 0, 0, 0, 0 };
-
-
-            int firstBit = parent2[0];
-            int secondBit;
-            int thirdBit;
-
-            // selected first bit of second parent for the starting point
-            
-            for (int i = 0; i < parent1.Length; i++)
-            {
-                offspring1[i] = firstBit;
-
-                // look for this value in the first parent, save the index 
-                for (int n = 0; n < 8; n++)
-                {
-                    if (parent1[n] == firstBit)
-                    {
-                        // Once we have found the matching value in the first parent grab the value in the same index from the second parent
-                        secondBit = parent2[n];
-
-                        // look for that value in the first parent
-                        for (int m = 0; m < 8; m++)
-                        {
-                            if (parent1[m] == secondBit)
-                            {
-                                //once that value has been found store the value of the second parent in the same index to the first offspring
-                                offspring2[i] = parent2[m];                               
-                                thirdBit = parent2[m];
-
-                                for (int k = 0; k < 8; k++)
-                                {
-                                    if (parent1[k] == thirdBit)
-                                    {
-                                        firstBit = parent2[k];
-                                        break;
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-
-            firstBit = 2;
-
-            // O1: 4, 
-            // O2: 1
-
         }
     }
 }

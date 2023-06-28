@@ -35,7 +35,7 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Genetics
             {
                 x = random.Next(validPoints.Count);
                 location = validPoints.ElementAt(x);
-                movements.Add(new Location(location.GetX(), location.GetY()));
+                movements.Add(new Location(location.GetValue()));
                 validPoints.RemoveAt(x);                
             }
 
