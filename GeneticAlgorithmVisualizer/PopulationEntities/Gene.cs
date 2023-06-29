@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithmVisualizer.PopulationEntities
 {
-    public abstract class Gene
+    public class Gene : IEquatable<Gene>
     {
         protected int _value;
 
@@ -20,5 +20,16 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
             return _value;
         }
 
+        public bool Equals(Gene other)
+        {
+            if (this._value == other.GetValue())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using GeneticAlgorithmVisualizer.PopulationEntities;
-using GeneticAlgorithmVisualizer.Travelplan.Entities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

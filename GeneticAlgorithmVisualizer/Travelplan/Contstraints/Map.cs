@@ -1,5 +1,4 @@
 ﻿using GeneticAlgorithmVisualizer.Constraints;
-using GeneticAlgorithmVisualizer.Travelplan.Entities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,18 +10,20 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Contstraints
 {
     internal class Map : RuleSet
     {
-        private int _size;
-        private List<Location> _locations;
+        private List<Tuple<int, int>> _points;              
 
-        public Map(int size)
+        public Map(int populationSize, int genomeSize)
         {
-            _size = size;
-            _locations = new List<Location>();
+            _populationSize = populationSize;
+            _chromosomeSize = genomeSize;
+            _points = new List<Tuple<int, int>>();
+
+            InstantiateGridPoints();
         }
 
-        public void InstantiateGridPoints(int locations)
+        private void InstantiateGridPoints()
         {
-            int points = locations;
+            int points = _chromosomeSize;
             Random random = new Random(Guid.NewGuid().GetHashCode());
 
             //randomly assign spots locations until we have hit max, ignore roll if already assigned
@@ -30,16 +31,21 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Contstraints
             //locations and plucking them deterministically, but I guess this is theoretically possible to never complete.
             while (points > 0)
             {
-                Location l = new Location(random.Next(0, _size));
-                if (_locations.Contains(l)) continue;
-                _locations.Add(l);
+                Tuple<int, int> l = new Tuple<int, int>(random.Next(0, _populationSize), random.Next(0, _populationSize));
+                if (_points.Contains(l)) continue;
+                _points.Add(l);
                 points--;
             }
         }
 
-        public List<Location> GetDestinations()
+        public List<Tuple<int, int>> GetDestinations()
         {
-            return _locations;
+            return _points;
+        }
+
+        public Tuple<int, int> GetDestinationByIndex(int index)
+        {
+            return _points.ElementAt(index);
         }
 
     }

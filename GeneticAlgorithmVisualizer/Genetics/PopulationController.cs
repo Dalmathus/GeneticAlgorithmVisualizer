@@ -1,7 +1,6 @@
 ﻿using GeneticAlgorithmVisualizer.Constraints;
 using GeneticAlgorithmVisualizer.PopulationEntities;
 using GeneticAlgorithmVisualizer.Travelplan.Contstraints;
-using GeneticAlgorithmVisualizer.Travelplan.Genetics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,13 +30,13 @@ namespace GeneticAlgorithmVisualizer.Genetics
         {
             _populations = new List<Population>();
             _generations = 0;
-            _ruleSet = ruleSet as Map;
+            _ruleSet = ruleSet;
             _rand = new Random(Guid.NewGuid().GetHashCode());
 
             // Instantiate the process queue,
             // possibly going to just make these all static later
             // but might want multiple threads running at once as different objects
-            _pg = new RoutePopulationGenerator();
+            _pg = new PopulationGenerator();
             _pc = new PopulationCrossover();
             _pm = new PopulationMutator();
             _pfe = new PopulationFitnessEvalutator();
@@ -93,7 +92,7 @@ namespace GeneticAlgorithmVisualizer.Genetics
             // Perform Mutation
 
             // Evaluate the Fitness of the Individual Chromosomes within the population
-            _pfe.EvaulateFitness(iterationPopulation);
+            _pfe.EvaulateFitness(iterationPopulation, _ruleSet);
 
             // Sort the Population
             iterationPopulation.Sort();

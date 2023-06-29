@@ -8,10 +8,32 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithmVisualizer.Genetics
 {
-    public abstract class PopulationGenerator
+    public class PopulationGenerator
     {
-        public abstract Population GenerateRandomPopulation(RuleSet ruleSet);
+        public Population GenerateRandomPopulation(RuleSet ruleSet)
+        {
+            Population randomPopulation = new Population();
 
-        public abstract Population CopyPopulation(Population population);
+            for (int i = 0; i < ruleSet.GetPopulationSize(); i++)
+            {
+                randomPopulation.Add(ChromosomeGenerator.GenerateRandomIndexChromosome(ruleSet));
+            }
+
+            return randomPopulation;
+        }
+
+        public Population CopyPopulation(Population population)
+        {
+            Population copyPopulation = new Population();
+
+            foreach (Chromosome c in population.GetChromosomes())
+            {
+                //copyPopulation.Add(new Chromosome(c));
+            }
+
+            return copyPopulation;
+        }
+
+
     }
 }

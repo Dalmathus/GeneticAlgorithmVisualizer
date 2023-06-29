@@ -1,6 +1,5 @@
 using GeneticAlgorithmVisualizer.Genetics;
 using GeneticAlgorithmVisualizer.PopulationEntities;
-using GeneticAlgorithmVisualizer.Travelplan.Entities;
 
 namespace GeneticAlgorithmVisualizerTests
 {
@@ -13,29 +12,29 @@ namespace GeneticAlgorithmVisualizerTests
             Chromosome offspring1Exepected;
             Chromosome offspring2Exepected;
 
-            List<Gene> genesFather = new List<Gene>();
-            List<Gene> genesMother = new List<Gene>();
+            List<Gene> genesFather = new();
+            List<Gene> genesMother = new();
 
-            genesFather.Add(new Location(3));
-            genesFather.Add(new Location(4));
-            genesFather.Add(new Location(8));
-            genesFather.Add(new Location(2));
-            genesFather.Add(new Location(7));
-            genesFather.Add(new Location(1));
-            genesFather.Add(new Location(6));
-            genesFather.Add(new Location(5));
+            genesFather.Add(new Gene(3));
+            genesFather.Add(new Gene(4));
+            genesFather.Add(new Gene(8));
+            genesFather.Add(new Gene(2));
+            genesFather.Add(new Gene(7));
+            genesFather.Add(new Gene(1));
+            genesFather.Add(new Gene(6));
+            genesFather.Add(new Gene(5));
 
-            genesMother.Add(new Location(4));
-            genesMother.Add(new Location(2));
-            genesMother.Add(new Location(5));
-            genesMother.Add(new Location(1));
-            genesMother.Add(new Location(6));
-            genesMother.Add(new Location(8));
-            genesMother.Add(new Location(3));
-            genesMother.Add(new Location(7));
+            genesMother.Add(new Gene(4));
+            genesMother.Add(new Gene(2));
+            genesMother.Add(new Gene(5));
+            genesMother.Add(new Gene(1));
+            genesMother.Add(new Gene(6));
+            genesMother.Add(new Gene(8));
+            genesMother.Add(new Gene(3));
+            genesMother.Add(new Gene(7));
 
-            Route parent1Father = new Route();
-            Route parent2Mother = new Route();
+            Chromosome parent1Father = new Chromosome();
+            Chromosome parent2Mother = new Chromosome();
 
             parent1Father.SetGenes(genesFather);
             parent2Mother.SetGenes(genesMother);

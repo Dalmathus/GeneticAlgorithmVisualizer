@@ -58,12 +58,6 @@
     <Compile Include="PopulationEntities\Population.cs" />
     <Compile Include="PopulationEntities\Chromosome.cs" />
     <Compile Include="Travelplan\Contstraints\Map.cs" />
-    <Compile Include="Travelplan\Entities\Location.cs" />
-    <Compile Include="Travelplan\Entities\Route.cs" />
-    <Compile Include="Travelplan\Entities\RoutePopulation.cs" />
-    <Compile Include="Travelplan\Genetics\RouteGenerator.cs" />
-    <Compile Include="Travelplan\Genetics\RoutePopulationFitnessEvaluator.cs" />
-    <Compile Include="Travelplan\Genetics\RoutePopulationGenerator.cs" />
     <Compile Include="Visualizer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +94,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Travelplan\Entities\" />
+    <Folder Include="Travelplan\Genetics\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

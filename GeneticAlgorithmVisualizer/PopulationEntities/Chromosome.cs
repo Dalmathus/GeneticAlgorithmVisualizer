@@ -1,5 +1,4 @@
-﻿using GeneticAlgorithmVisualizer.Travelplan.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,20 +6,58 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithmVisualizer.PopulationEntities
 {
-    public abstract class Chromosome : IEquatable<Chromosome>, IComparable<Chromosome>
+    public class Chromosome : IEquatable<Chromosome>, IComparable<Chromosome>
     {
         protected List<Gene> _genes;
-        protected double _fitness; 
+        protected double _fitness;
 
-        public abstract void Export();
+        public Chromosome()
+        {
+            _genes = new List<Gene>();
+        }            
 
-        public abstract void Import();
+        public int CompareTo(Chromosome other)
+        {
+            Chromosome comparisonRoute = other;
 
-        public abstract int CompareTo(Chromosome other);
+            if (other == null) return 1;
 
-        public abstract bool Equals(Chromosome other);
+            double x = this.GetFitness();
+            double y = comparisonRoute.GetFitness();
 
-        public abstract void CalculateFitness();
+            if (x < y) return -1;
+            if (x > y) return 1;
+            return 0;
+        }
+
+        public void AddGene(Gene gene)
+        {
+            _genes.Add(gene);
+        }
+
+        public void AddGene(int gene)
+        {
+            _genes.Add(new Gene(gene));
+        }
+
+        public bool Equals(Chromosome other)
+        {
+
+            List<Gene> currentLocation = this._genes;
+            List<Gene> comparisonLocation = other.GetGenes();
+
+            for (int i = 0; i < currentLocation.Count; i++)
+            {
+                if (!currentLocation.ElementAt(i).Equals(comparisonLocation.ElementAt(i))) return false;
+            }
+
+            return true;
+        }
+
+        public void CalculateFitness()
+        {
+            //throw new NotImplementedException();
+        }
 
         public void SetFitness(double fitness)
         {
@@ -28,7 +65,7 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
         }
 
         public double GetFitness()
-        { 
+        {
             return this._fitness;
         }
 
@@ -40,6 +77,21 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
         public List<Gene> GetGenes()
         {
             return this._genes;
+        }
+
+        public Gene GetGeneByIndex(int index)
+        {
+            return this._genes.ElementAt(index);
+        }
+
+        public void Export()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Import()
+        {
+            throw new NotImplementedException();
         }
     }
 }

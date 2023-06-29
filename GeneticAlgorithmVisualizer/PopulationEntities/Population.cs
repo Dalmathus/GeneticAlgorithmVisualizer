@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithmVisualizer.PopulationEntities
 {
-    public abstract class Population
+    public class Population
     {
         protected List<Chromosome> _chromosomes;
 
@@ -35,10 +35,14 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
             _chromosomes.Clear();
         }
 
-        public abstract void Export();
+        public void Export()
+        {
+            throw new NotImplementedException();
+        }
 
-        public abstract void Import();
-
-        
+        public void Import()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
