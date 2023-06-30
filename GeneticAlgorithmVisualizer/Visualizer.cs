@@ -3,6 +3,7 @@ using GeneticAlgorithmVisualizer.PopulationEntities;
 using GeneticAlgorithmVisualizer.Travelplan.Contstraints;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -128,7 +129,7 @@ namespace GeneticAlgorithmVisualizer
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
             DrawRoute(r, randomColor);
-            r.CalculateFitness();
+            ChromosomeFitnessCalculator.CalculateFitness(r, _map);
             labelBDText.Text = r.GetFitness().ToString();
         }
 
@@ -141,7 +142,7 @@ namespace GeneticAlgorithmVisualizer
             rpop.Sort();
 
             ResetGrid();
-            rpop.GetChromosomes().ElementAt(0).CalculateFitness();
+            ChromosomeFitnessCalculator.CalculateFitness(rpop.GetChromosomes().ElementAt(0), _map);
             labelBDText.Text = rpop.GetChromosomes().ElementAt(0).GetFitness().ToString();
             DrawRoute(rpop.GetChromosomes().ElementAt(0), Color.Black);
         }

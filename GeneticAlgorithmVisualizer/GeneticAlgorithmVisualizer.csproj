@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constraints\RuleSet.cs" />
+    <Compile Include="Genetics\ChromosomeFitnessCalculator.cs" />
     <Compile Include="Genetics\ChromosomeGenerator.cs" />
     <Compile Include="Genetics\PopulationController.cs" />
     <Compile Include="Genetics\PopulationCrossover.cs" />

@@ -54,11 +54,6 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
             return true;
         }
 
-        public void CalculateFitness()
-        {
-            //throw new NotImplementedException();
-        }
-
         public void SetFitness(double fitness)
         {
             this._fitness = fitness;
