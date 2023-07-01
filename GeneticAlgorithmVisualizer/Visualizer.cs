@@ -140,8 +140,8 @@ namespace GeneticAlgorithmVisualizer
 
             Population rpop = rg.GenerateRandomPopulation(_map);
             rpop.Sort();
-
             ResetGrid();
+
             ChromosomeFitnessCalculator.CalculateFitness(rpop.GetChromosomes().ElementAt(0), _map);
             labelBDText.Text = rpop.GetChromosomes().ElementAt(0).GetFitness().ToString();
             DrawRoute(rpop.GetChromosomes().ElementAt(0), Color.Black);
