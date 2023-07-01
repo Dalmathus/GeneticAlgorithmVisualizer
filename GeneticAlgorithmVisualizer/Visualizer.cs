@@ -14,8 +14,8 @@ namespace GeneticAlgorithmVisualizer
 
         private Map _map;
         private const int SIZE = 25;
-        private const int POPULATION = 20000;
-        private const int LOCATIONS = 20;
+        private const int POPULATION = 2000;
+        private const int LOCATIONS = 200;
         private int cellSize;
         private PopulationController pc;
 
@@ -67,20 +67,25 @@ namespace GeneticAlgorithmVisualizer
 
         private void ResetGrid()
         {
+            this.SuspendLayout();
             this.TravelMap.Refresh();            
             DrawGrid();
             DrawLocations();
             labelBDText.Text = "";
+            this.ResumeLayout();
         }
 
         private void DrawRoute(Chromosome route, Color c)
         {
+            this.SuspendLayout();
+
             List<Tuple<int, int>> points = _map.GetDestinations();
 
             int offset = cellSize / 2;
 
             using (Graphics g = this.TravelMap.CreateGraphics())
             {
+
                 Pen p = new Pen(c, 2);
 
                 for (int i = route.GetGenes().Count - 1; i > 0; i--) {
@@ -95,7 +100,10 @@ namespace GeneticAlgorithmVisualizer
                                endPoint.Item2 * cellSize + offset);
 
                 }
+
             }
+
+            this.ResumeLayout();
         }
 
         private void buttonMapCreate_Click(object sender, EventArgs e)
@@ -154,20 +162,18 @@ namespace GeneticAlgorithmVisualizer
         /// <param name="e"></param>
         private void buttonFuncTest_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 100; i++)
             {
-
                 pc.RunGenerationCycle();
 
-                List<Population> populationList = pc.GetPopulations();
-                Chromosome bestRoute = populationList[populationList.Count - 1].GetChromosomes()[0];
-
+                Population population = pc.GetPopulations();
+                Chromosome bestRoute = population.GetChromosomes()[0];
                 ResetGrid();
                 labelGeneration.Text = pc.GetGeneration().ToString();
                 labelBDText.Text = bestRoute.GetFitness().ToString();
                 DrawRoute(bestRoute, Color.Black);
 
-            }
+            }         
         }
     }
 }
