@@ -6,8 +6,6 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace GeneticAlgorithmVisualizer.Genetics
 {

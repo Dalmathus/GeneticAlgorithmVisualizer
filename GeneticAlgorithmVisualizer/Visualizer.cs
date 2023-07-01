@@ -3,7 +3,6 @@ using GeneticAlgorithmVisualizer.PopulationEntities;
 using GeneticAlgorithmVisualizer.Travelplan.Contstraints;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
