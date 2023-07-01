@@ -13,8 +13,9 @@ namespace GeneticAlgorithmVisualizer
     {
 
         private Map _map;
-        private const int SIZE = 5;
-        private const int LOCATIONS = 4;
+        private const int SIZE = 25;
+        private const int POPULATION = 20000;
+        private const int LOCATIONS = 20;
         private int cellSize;
         private PopulationController pc;
 
@@ -29,7 +30,7 @@ namespace GeneticAlgorithmVisualizer
 
         private void InitializeGrid()
         {
-            _map = new Map(SIZE, LOCATIONS);
+            _map = new Map(POPULATION, LOCATIONS, SIZE);
             cellSize = (this.TravelMap.Size.Width - 1) / SIZE;        
         }
 
@@ -153,7 +154,20 @@ namespace GeneticAlgorithmVisualizer
         /// <param name="e"></param>
         private void buttonFuncTest_Click(object sender, EventArgs e)
         {
-            //pc.RunGenerationCycle();
+            for (int i = 0; i < 50; i++)
+            {
+
+                pc.RunGenerationCycle();
+
+                List<Population> populationList = pc.GetPopulations();
+                Chromosome bestRoute = populationList[populationList.Count - 1].GetChromosomes()[0];
+
+                ResetGrid();
+                labelGeneration.Text = pc.GetGeneration().ToString();
+                labelBDText.Text = bestRoute.GetFitness().ToString();
+                DrawRoute(bestRoute, Color.Black);
+
+            }
         }
     }
 }

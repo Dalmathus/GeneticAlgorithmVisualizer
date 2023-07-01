@@ -12,7 +12,11 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
         public Chromosome()
         {
             _genes = new List<Gene>();
-        }            
+        }
+        public Chromosome(List<Gene> genes)
+        {
+            _genes = genes;
+        }
 
         public int CompareTo(Chromosome other)
         {
@@ -77,6 +81,11 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
             return this._genes.ElementAt(index);
         }
 
+        public void SetGeneByIndex(int index, int value)
+        {
+            _genes[index].SetValue(value);
+        }
+
         public void Export()
         {
             throw new NotImplementedException();
@@ -85,6 +94,18 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
         public void Import()
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            string c = "{ ";
+
+            foreach (Gene gene in this._genes) 
+            { 
+             c += gene.ToString() + " ";
+            }
+
+            return c += "}";
         }
     }
 }

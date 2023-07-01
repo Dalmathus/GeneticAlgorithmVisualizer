@@ -28,7 +28,7 @@ namespace GeneticAlgorithmVisualizer.Genetics
 
             foreach (Chromosome c in population.GetChromosomes())
             {
-                //copyPopulation.Add(new Chromosome(c));
+                copyPopulation.Add(c);
             }
 
             return copyPopulation;

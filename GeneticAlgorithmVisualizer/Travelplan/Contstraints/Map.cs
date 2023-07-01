@@ -8,11 +8,13 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Contstraints
     internal class Map : RuleSet
     {
         private List<Tuple<int, int>> _points;              
+        private int _mapSize;
 
-        public Map(int populationSize, int genomeSize)
+        public Map(int populationSize, int chromosomeSize, int mapSize)
         {
             _populationSize = populationSize;
-            _chromosomeSize = genomeSize;
+            _chromosomeSize = chromosomeSize;
+            _mapSize = mapSize;
             _points = new List<Tuple<int, int>>();
 
             InstantiateGridPoints();
@@ -28,7 +30,7 @@ namespace GeneticAlgorithmVisualizer.Travelplan.Contstraints
             //locations and plucking them deterministically, but I guess this is theoretically possible to never complete.
             while (points > 0)
             {
-                Tuple<int, int> l = new Tuple<int, int>(random.Next(0, _populationSize), random.Next(0, _populationSize));
+                Tuple<int, int> l = new Tuple<int, int>(random.Next(0, _mapSize), random.Next(0, _mapSize));
                 if (_points.Contains(l)) continue;
                 _points.Add(l);
                 points--;

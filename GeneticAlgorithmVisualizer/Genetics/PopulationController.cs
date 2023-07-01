@@ -2,25 +2,26 @@
 using GeneticAlgorithmVisualizer.PopulationEntities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GeneticAlgorithmVisualizer.Genetics
 {
-    internal class PopulationController
+    public class PopulationController
     {
         protected List<Population> _populations;
         
         protected PopulationGenerator _pg;        
         protected PopulationCrossover _pc;
-        protected PopulationMutator _pm;
+        //protected PopulationMutator _pm;
         protected PopulationFitnessEvalutator _pfe;
-        protected PopulationSelector _ps;
+        //protected PopulationSelector _ps;
 
         protected RuleSet _ruleSet;
 
         private int _generations;
 
         private Random _rand;
-        private double _crossoverRate = 0.3d;
+        private double _crossoverRate = 0.5d;
 
         public PopulationController(RuleSet ruleSet, string[] args)
         {
@@ -34,18 +35,9 @@ namespace GeneticAlgorithmVisualizer.Genetics
             // but might want multiple threads running at once as different objects
             _pg = new PopulationGenerator();
             _pc = new PopulationCrossover();
-            _pm = new PopulationMutator();
+            //_pm = new PopulationMutator();
             _pfe = new PopulationFitnessEvalutator();
-            _ps = new PopulationSelector();
-
-            switch (args[0])
-            {
-                case "travelplan":
-                    System.Console.WriteLine("Running the Travelling Salesman problem");
-                    break;
-                default: System.Console.WriteLine("No Argument Provided");
-                    break;
-            }
+            //_ps = new PopulationSelector();
         }
 
         /// <summary>
@@ -74,12 +66,13 @@ namespace GeneticAlgorithmVisualizer.Genetics
             {
                 if (_rand.NextDouble() < _crossoverRate)
                 {
-                    //Tuple<Chromosome, Chromosome> offspring = _pc.CycleCrossoverTwoRoutes(chromosome, iterationPopulation.GetChromosomes().ElementAt(_rand.Next(0, iterationPopulation.GetChromosomes().Count)));
-                    //newOffspring.Add(offspring.Item1);
-                    //newOffspring.Add(offspring.Item2);
+                    Tuple<Chromosome, Chromosome> offspring = PopulationCrossover.CycleCrossover(chromosome, iterationPopulation.GetChromosomes().ElementAt(_rand.Next(0, iterationPopulation.GetChromosomes().Count)));
+                    newOffspring.Add(offspring.Item1);
+                    newOffspring.Add(offspring.Item2);
                 }
             }
 
+            // Add the new offspring
             foreach (Chromosome chromosome in newOffspring)
             {
                 iterationPopulation.Add(chromosome);
@@ -94,11 +87,22 @@ namespace GeneticAlgorithmVisualizer.Genetics
             iterationPopulation.Sort();
 
             // Select Surviors
-            iterationPopulation.GetChromosomes().RemoveRange(100, iterationPopulation.GetChromosomes().Count - 100);
+            if (iterationPopulation.GetChromosomes().Count - _ruleSet.GetPopulationSize() > 0)
+                iterationPopulation.GetChromosomes().RemoveRange(_ruleSet.GetPopulationSize(), iterationPopulation.GetChromosomes().Count - _ruleSet.GetPopulationSize());
 
             // Iterate the Generation #
             _populations.Add(iterationPopulation);
             _generations++;
-        }        
+        }
+
+        public List<Population> GetPopulations()
+        {
+            return this._populations;
+        }
+
+        public int GetGeneration()
+        {
+            return this._generations;
+        }
     }
 }

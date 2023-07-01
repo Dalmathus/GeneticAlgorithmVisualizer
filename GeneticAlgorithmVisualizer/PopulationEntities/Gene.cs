@@ -16,6 +16,11 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
             return _value;
         }
 
+        public void SetValue(int value)
+        {
+           _value = value;
+        }
+
         public bool Equals(Gene other)
         {
             if (this._value == other.GetValue())
@@ -26,6 +31,11 @@ namespace GeneticAlgorithmVisualizer.PopulationEntities
             {
                 return false;
             }
+        }
+
+        public override string ToString()
+        {
+            return _value.ToString();
         }
     }
 }

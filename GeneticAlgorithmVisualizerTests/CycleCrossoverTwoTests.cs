@@ -39,21 +39,19 @@ namespace GeneticAlgorithmVisualizerTests
             parent1Father.SetGenes(genesFather);
             parent2Mother.SetGenes(genesMother);
 
-            PopulationCrossover pc = new PopulationCrossover();
-            //Tuple<Chromosome, Chromosome> results = pc.CycleCrossoverTwoRoutes(parent1Father, parent2Mother);
+            Tuple<Chromosome, Chromosome> results = PopulationCrossover.CycleCrossoverTwoRoutes(parent1Father, parent2Mother);
 
-            //offspring1Exepected = results.Item1;
-            //offspring2Exepected = results.Item2;
-            //
-            //Assert.AreEqual("{ 4 8 6 2 5 3 1 7 }", offspring1Exepected.ToString());
-            //Assert.AreEqual("{ 1 7 4 8 6 2 5 3 }", offspring2Exepected.ToString());
-            //
-            //// Mess with the parents
-            //genesFather.Remove(genesFather.ElementAt(2));
-            //
-            //Assert.AreEqual("{ 4 8 6 2 5 3 1 7 }", offspring1Exepected.ToString());
-            //Assert.AreEqual("{ 1 7 4 8 6 2 5 3 }", offspring2Exepected.ToString());
-
+            offspring1Exepected = results.Item1;
+            offspring2Exepected = results.Item2;
+            
+            Assert.AreEqual("{ 4 8 6 2 5 3 1 7 }", offspring1Exepected.ToString());
+            Assert.AreEqual("{ 1 7 4 8 6 2 5 3 }", offspring2Exepected.ToString());
+            
+            // Mess with the parents
+            genesFather.Remove(genesFather.ElementAt(2));
+            
+            Assert.AreEqual("{ 4 8 6 2 5 3 1 7 }", offspring1Exepected.ToString());
+            Assert.AreEqual("{ 1 7 4 8 6 2 5 3 }", offspring2Exepected.ToString());
         }
     }
 }
