@@ -13,9 +13,9 @@ namespace GeneticAlgorithmVisualizer
     {
 
         private Map _map;
-        private const int SIZE = 25;
-        private const int POPULATION = 2000;
-        private const int LOCATIONS = 200;
+        private const int SIZE = 5;
+        private const int POPULATION = 50000;
+        private const int LOCATIONS = 25;
         private int cellSize;
         private PopulationController pc;
 
@@ -24,7 +24,7 @@ namespace GeneticAlgorithmVisualizer
             InitializeComponent();
             InitializeGrid();
 
-            string[] args = { "travelplan" };
+            string[] args = { "travelplan" }; // This does nothing.
             pc = new PopulationController(_map, args);
         }
 
